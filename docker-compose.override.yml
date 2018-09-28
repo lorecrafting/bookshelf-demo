@@ -24,8 +24,18 @@ services:
       - '${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}'
     networks:
       - my-app-network
+  redis:
+    image: redis:4.0-alpine
+    env_file: .env
+    volumes:
+      - redis-data-volume:/data
+    ports:
+      - '${REDIS_HOST_PORT}:${REDIS_CONTAINER_PORT}'
+    networks:
+      - my-app-network
 
 volumes: 
   pg-data-volume:
+  redis-data-volume:
 networks:
   my-app-network:
