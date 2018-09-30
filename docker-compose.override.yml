@@ -3,7 +3,8 @@ services:
   bookshelf-auth-demo:
     image: lorecrafting/bookshelf-auth-demo:${IMAGE_VERSION}-local
     depends_on:
-      - db
+      - postgres-primary-db
+      - redis-session-store
     command: ["./node_modules/.bin/nodemon", "app.js"]
     container_name: bookshelf-auth-demo
     volumes:
@@ -15,7 +16,7 @@ services:
       - "${EXPRESS_HOST_PORT}:${EXPRESS_CONTAINER_PORT}"
     networks:
       - my-app-network
-  db:
+  postgres-primary-db:
     image: postgres:10.0-alpine
     env_file: .env
     volumes: 
@@ -24,7 +25,7 @@ services:
       - '${POSTGRES_HOST_PORT}:${POSTGRES_CONTAINER_PORT}'
     networks:
       - my-app-network
-  redis:
+  redis-session-store:
     image: redis:4.0-alpine
     env_file: .env
     volumes:

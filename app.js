@@ -2,16 +2,45 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 
+const session = require('express-session');
+const RedisStore = require('connect-redis')(session);
+const passport = require('passport')
+
 const PORT = process.env.EXPRESS_CONTAINER_PORT;
-const Tasks = require('./db/models/Tasks');
-const Users = require('./db/models/Users');
+const Tasks = require('./db/models/Tasks.js');
+const Users = require('./db/models/Users.js');
+const AuthRoutes = require('./routes/authRoutes.js')
+
+
+
 
 const app = express();
+
+
+app.use(session({
+  store: new RedisStore({url: 'redis://redis-session-store:6379', logErrors: true}),
+  secret: 'lollerkates',
+  resave: false,
+  saveUninitialized: true
+}))
+ 
+app.use(passport.initialize());
+app.use(passport.session());
+
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+app.use('/auth', AuthRoutes)
+
 app.get('/', (req, res) => {
+  
+  if (!req.session.viewCount) {
+    req.session.viewCount = 1
+  } else {
+    req.session.viewCount++
+  }
+  console.log('req.session', req.session)
   res.send('sanity check')
 })
 
