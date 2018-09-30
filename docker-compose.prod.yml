@@ -2,6 +2,7 @@ version: '3'
 services:
   bookshelf-auth-demo:
     image: lorecrafting/bookshelf-auth-demo:${IMAGE_VERSION}
+    env_file: .env.prod
     environment:
       NODE_ENV: production
     depends-on:
@@ -15,7 +16,7 @@ services:
       - my-app-network
   postgres-primary-db:
     image: postgres:10.0-alpine
-    env_file: .env
+    env_file: .env.prod
     volumes: 
       - pg-data-volume:/var/lib/postgresql/data
     ports: 
@@ -24,7 +25,7 @@ services:
       - my-app-network
   redis-session-store:
     image: redis:4.0-alpine
-    env_file: .env
+    env_file: .env.prod
     volumes:
       - redis-data-volume:/data
     ports:
