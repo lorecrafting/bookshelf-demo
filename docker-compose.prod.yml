@@ -5,7 +5,7 @@ services:
     env_file: .env.prod
     environment:
       NODE_ENV: production
-    depends-on:
+    depends_on:
       - postgres-primary-db
       - redis-session-store
     command: ["node", "app.js"]
