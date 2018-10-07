@@ -1,5 +1,5 @@
 version: '3'
 services:
-  bookshelf-auth-demo:
+  react-inventory:
     build: .
-    image: lorecrafting/bookshelf-auth-demo:local
+    image: lorecrafting/react-inventory

@@ -1,22 +1,22 @@
 version: '3'
 services:
-  bookshelf-auth-demo:
-    image: lorecrafting/bookshelf-auth-demo:${IMAGE_VERSION}
-    env_file: .prod.env
+  react-inventory:
+    image: lorecrafting/react-inventory:${IMAGE_VERSION}
+    env_file: .env
     environment:
       NODE_ENV: production
     depends_on:
       - postgres-primary-db
       - redis-session-store
     command: ["node", "app.js"]
-    container_name: bookshelf-auth-prod
+    container_name: react-inventory
     ports:
       - "${EXPRESS_HOST_PORT}:${EXPRESS_CONTAINER_PORT}"
     networks:
       - my-app-network
   postgres-primary-db:
     image: postgres:10.0-alpine
-    env_file: .prod.env
+    env_file: .env
     volumes: 
       - pg-data-volume:/var/lib/postgresql/data
     ports: 
@@ -25,7 +25,7 @@ services:
       - my-app-network
   redis-session-store:
     image: redis:4.0-alpine
-    env_file: .prod.env
+    env_file: .env
     volumes:
       - redis-data-volume:/data
     ports:
