@@ -4,6 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
+    "dev": "nodemon server.js & gulp",
     "migrate": "POSTGRES_HOSTNAME=localhost POSTGRES_CONTAINER_PORT=8765 npx knex migrate:latest",
     "seed": "POSTGRES_HOSTNAME=localhost POSTGRES_CONTAINER_PORT=8765  npx knex seed:run",
     "flushdb": "POSTGRES_HOSTNAME=localhost POSTGRES_CONTAINER_PORT=8765 npx knex migrate:rollback ; POSTGRES_HOSTNAME=localhost POSTGRES_CONTAINER_PORT=8765 npx knex migrate:latest ; POSTGRES_HOSTNAME=localhost POSTGRES_CONTAINER_PORT=8765 npx knex seed:run"

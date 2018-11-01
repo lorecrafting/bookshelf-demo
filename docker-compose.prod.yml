@@ -1,7 +1,7 @@
 version: '3'
 services:
-  react-inventory:
-    image: lorecrafting/react-inventory:${IMAGE_VERSION}
+  bookshelf-auth-demo:
+    image: lorecrafting/bookshelf-auth-demo:${IMAGE_VERSION}
     env_file: .env
     environment:
       NODE_ENV: production
@@ -9,7 +9,7 @@ services:
       - postgres-primary-db
       - redis-session-store
     command: ["node", "app.js"]
-    container_name: react-inventory
+    container_name: bookshelf-auth-demo
     ports:
       - "${EXPRESS_HOST_PORT}:${EXPRESS_CONTAINER_PORT}"
     networks:

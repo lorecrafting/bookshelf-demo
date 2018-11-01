@@ -5,7 +5,7 @@ services:
     depends_on:
       - postgres-primary-db
       - redis-session-store
-    command: ["./node_modules/.bin/nodemon", "app.js"]
+    command: ["npm", "run", "dev"]
     container_name: bookshelf-auth-demo
     volumes:
       - ".:/app/:rw"
