@@ -9,11 +9,14 @@ services:
     container_name: bookshelf-auth-demo
     volumes:
       - ".:/app/:rw"
+      - /app/node_modules
     env_file: .env
     environment:
       NODE_ENV: development
     ports:
       - "${EXPRESS_HOST_PORT}:${EXPRESS_CONTAINER_PORT}"
+      - "3000:3000"
+      - "3001:3001"
     networks:
       - my-app-network
   postgres-primary-db:

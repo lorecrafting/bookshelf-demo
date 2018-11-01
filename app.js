@@ -11,9 +11,6 @@ const Tasks = require('./db/models/Tasks.js');
 const Users = require('./db/models/Users.js');
 const AuthRoutes = require('./routes/authRoutes.js')
 
-
-
-
 const app = express();
 
 
